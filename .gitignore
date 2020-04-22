@@ -1,0 +1,9 @@
+.vs/
+ElevenNote.Data/bin/
+ElevenNote.Data/obj/
+ElevenNote.Models/bin/
+ElevenNote.Models/obj/
+ElevenNote.Services/bin/
+ElevenNote.Services/obj/
+ElevenNote.WebAPI/bin/
+ElevenNote.WebAPI/obj/
