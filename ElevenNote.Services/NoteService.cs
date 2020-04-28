@@ -19,7 +19,7 @@ namespace ElevenNote.Services
 
         public bool CreateNote(NoteCreate model)
         {
-            var entity = 
+            var entity =
                 new Note()
                 {
                     OwnerId = _userId,
@@ -39,10 +39,10 @@ namespace ElevenNote.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = 
+                var query =
                     ctx
                         .Notes
-                        .Where(e =>e.OwnerId == _userId)
+                        .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
                                 new NoteListItem
@@ -54,6 +54,26 @@ namespace ElevenNote.Services
                         );
 
                 return query.ToArray();
+            }
+        }
+
+        public NoteDetail GetNoteById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Notes
+                        .Single(e => e.NoteId == id && e.OwnerId == _userId);
+                return
+                    new NoteDetail
+                    {
+                        NoteId = entity.NoteId,
+                        Title = entity.Title,
+                        Content = entity.Content,
+                        CreatedUtc = entity.CreatedUtc,
+                        ModifiedUtc = entity.ModifiedUtc
+                    };
             }
         }
     }
